@@ -1,1 +1,24 @@
+自动化部署监控:
+  -zabbix-agent:3.2
+  
+变量位置:
+  role/zabbix/zabbix-agent/defaults/main.yml
+  inventory/vpn1/host_vars/agent1.yml
+  inventory/vpn1/group_vars/zabbix-agent.yml
 
+
+支持系统版本: Centos7&6 
+
+
+目录路径: /etc/zabbix/
+
+
+自动化部署zabbix-agent监控脚本
+  - 硬盘监控脚本
+  - TCP连接监控
+  - redis监控脚本
+  
+  - 支持zabbix - API
+     - 创建群组
+     - 创建Host和更新
+     - 创建Macro
