@@ -1,0 +1,13 @@
+hostname: agent1
+
+#=======zabbix-api=============
+agent_ip: "{{ ansible_default_ipv4.address }}"
+#zbx_host_groups:
+#              - "vpn1"
+#zbx_link_templates:
+#                 - "Template DCITS OS Linux"
+
+
+
+
+

@@ -1,0 +1,4 @@
+#=======ZABBIX-API===========
+zbx_host_groups:    #需要创建的群组
+  - ansible-test1
+nginx_daemon: "10.0.51.4"

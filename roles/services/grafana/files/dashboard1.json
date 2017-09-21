@@ -1,0 +1,17 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "Application Dashboard ansible1",
+    "tags": [
+      "ansible-test1"
+    ],
+    "timezone": "browser",
+    "rows": [
+    	{
+    	}
+    ],
+    "schemaVersion": 6,
+    "version": 0
+  },
+  "overwrite": "false"
+}

@@ -1,0 +1,7 @@
+---
+- hosts: zabbix-agent
+  user: root
+  become: yes
+  gather_facts: yes
+  roles:
+    - zabbix/zabbix-agent

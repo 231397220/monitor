@@ -1,0 +1,15 @@
+[zabbix-server]
+server1  ansible_user=root ansible_host=172.18.201.52 ansible_password=password
+
+[zabbix-agent]
+#agent1 ansible_user=root ansible_port=1888 ansible_password=111111 ansible_host=172.18.201.52
+#agent2 ansible_user=root ansible_port=1889 ansible_password=111111 ansible_host=172.18.201.52
+#agent3 ansible_user=root ansible_port=1888 ansible_password=111111 ansible_host=172.18.201.53
+#agent4 ansible_user=root ansible_port=1889 ansible_password=111111 ansible_host=172.18.201.53
+server1  ansible_user=root ansible_host=172.18.201.52 ansible_password=password
+runner1  ansible_user=root ansible_host=172.18.201.52 ansible_password=password
+runner2  ansible_user=root ansible_host=172.18.201.53 ansible_password=password
+
+
+[grafana]
+grafana1 ansible_user=root ansible_host=172.18.201.51 ansible_password=password

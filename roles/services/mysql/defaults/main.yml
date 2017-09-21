@@ -1,0 +1,28 @@
+#[mysql]
+files: [
+        { src: "CentOS-Base.repo", dest: "/etc/yum.repos.d/CentOS-Base.repo", mode: "0644", owner: "root", group: "root", class: "mysql" },
+]
+
+mysql_rpm_dependent: [
+        { name: "epel-release", state: "present" },
+        { name: "gcc", state: "present" },
+        { name: "perl(Data::Dumper)", state: "present" },
+        { name: "mariadb", state: "absent" },
+        { name: "mariadb-server", state: "absent" },
+        { name: "mariadb-libs", state: "absent" },
+]        
+
+
+mysql_rpm_install: [
+        { name: "mariadb", state: "present" },
+        { name: "mariadb-libs", state: "present" },
+        { name: "mariadb-server", state: "present" },    
+        { name: "MySQL-python", state: "present" },
+]
+
+
+
+
+
+
+

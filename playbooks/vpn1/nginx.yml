@@ -1,0 +1,7 @@
+---
+- hosts: zabbix-server
+  user: root
+  become: yes
+  gather_facts: yes
+  roles:
+    - server

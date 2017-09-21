@@ -1,0 +1,373 @@
+{
+  "dashborad": {
+    "version": 4,
+    "tags": [
+      "NEW-TEST1"
+    ],
+    "rows": [
+      {
+        "collapse": false,
+        "height": 341,
+        "panels": [
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "${DS_ZABBIX-SOURCE}",
+            "decimals": 0,
+            "fill": 1,
+            "id": 9,
+            "legend": {
+              "alignAsTable": false,
+              "avg": false,
+              "current": false,
+              "hideEmpty": false,
+              "max": false,
+              "min": false,
+              "rightSide": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "connected",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 12,
+            "stack": true,
+            "steppedLine": false,
+            "targets": [
+              {
+                "application": {
+                  "filter": "Network interfaces"
+                },
+                "functions": [],
+                "group": {
+                  "filter": "$groups"
+                },
+                "host": {
+                  "filter": "$hosts"
+                },
+                "item": {
+                  "filter": "TCP LISTEN"
+                },
+                "mode": 0,
+                "options": {
+                  "showDisabledItems": false
+                },
+                "refId": "A"
+              }
+            ],
+            "thresholds": [
+              {
+                "colorMode": "warning",
+                "fill": false,
+                "line": true,
+                "op": "gt",
+                "value": 20
+              },
+              {
+                "colorMode": "critical",
+                "fill": true,
+                "line": true,
+                "op": "gt",
+                "value": 25
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Requests/s",
+            "tooltip": {
+              "shared": false,
+              "sort": 0,
+              "value_type": "cumulative"
+            },
+            "transparent": true,
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": "",
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "repeat": null,
+        "repeatIteration": null,
+        "repeatRowId": null,
+        "showTitle": true,
+        "title": "NetWork",
+        "titleSize": "h6"
+      },
+      {
+        "collapse": false,
+        "height": 297,
+        "panels": [
+          {
+            "aliasColors": {},
+            "bars": true,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "${DS_ZABBIX-SOURCE}",
+            "decimals": 0,
+            "fill": 1,
+            "id": 21,
+            "legend": {
+              "alignAsTable": false,
+              "avg": false,
+              "current": false,
+              "hideEmpty": false,
+              "max": false,
+              "min": false,
+              "rightSide": false,
+              "show": false,
+              "total": false,
+              "values": false
+            },
+            "lines": false,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "connected",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 6,
+            "stack": true,
+            "steppedLine": false,
+            "targets": [
+              {
+                "application": {
+                  "filter": "Network interfaces"
+                },
+                "functions": [
+                  {
+                    "def": {
+                      "name": "sum",
+                      "category": "Aggregate",
+                      "params": [
+                        {
+                          "name": "interval",
+                          "type": "string"
+                        }
+                      ],
+                      "defaultParams": [
+                        "1m"
+                      ]
+                    },
+                    "params": [
+                      "$interval"
+                    ],
+                    "text": "sum($interval)"
+                  }
+                ],
+                "group": {
+                  "filter": "$groups"
+                },
+                "host": {
+                  "filter": "$hosts"
+                },
+                "item": {
+                  "filter": "TCP LISTEN"
+                },
+                "mode": 0,
+                "options": {
+                  "showDisabledItems": false
+                },
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Requets/$interval",
+            "tooltip": {
+              "shared": false,
+              "sort": 0,
+              "value_type": "cumulative"
+            },
+            "transparent": true,
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": "",
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": true,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "${DS_ZABBIX-SOURCE}",
+            "decimals": 0,
+            "fill": 1,
+            "id": 22,
+            "legend": {
+              "alignAsTable": false,
+              "avg": false,
+              "current": false,
+              "hideEmpty": false,
+              "max": false,
+              "min": false,
+              "rightSide": false,
+              "show": false,
+              "total": false,
+              "values": false
+            },
+            "lines": false,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "connected",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 6,
+            "stack": true,
+            "steppedLine": false,
+            "targets": [
+              {
+                "application": {
+                  "filter": "Network interfaces"
+                },
+                "functions": [
+                  {
+                    "def": {
+                      "name": "sum",
+                      "category": "Aggregate",
+                      "params": [
+                        {
+                          "name": "interval",
+                          "type": "string"
+                        }
+                      ],
+                      "defaultParams": [
+                        "1m"
+                      ]
+                    },
+                    "params": [
+                      "$interval"
+                    ],
+                    "text": "sum($interval)"
+                  }
+                ],
+                "group": {
+                  "filter": "$groups"
+                },
+                "host": {
+                  "filter": "$hosts"
+                },
+                "item": {
+                  "filter": "TCP LISTEN"
+                },
+                "mode": 0,
+                "options": {
+                  "showDisabledItems": false
+                },
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": "24h",
+            "title": "Requets/$interval (A day after)",
+            "tooltip": {
+              "shared": false,
+              "sort": 0,
+              "value_type": "cumulative"
+            },
+            "transparent": true,
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": "",
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "repeat": null,
+        "repeatIteration": null,
+        "repeatRowId": null,
+        "showTitle": false,
+        "title": "Dashboard Row",
+        "titleSize": "h6"
+      }
+    ],
+    "schemaVersion": 14,
+    "id": null,
+    "title": "Application Dashboard",
+    "timezone": "browser"
+  },
+  "overwrite": "false"
+}

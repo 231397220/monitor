@@ -1,0 +1,4 @@
+hostname: runner1
+
+#=======zabbix-api=============
+agent_ip: "{{ ansible_default_ipv4.address }}"

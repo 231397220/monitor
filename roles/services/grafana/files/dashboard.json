@@ -1,0 +1,15 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "ansible-test1",
+    "tags": [ "templated" ],
+    "timezone": "browser",
+    "rows": [
+      {
+      }
+    ],
+    "schemaVersion": 6,
+    "version": 0
+  },
+  "overwrite": false
+}

@@ -1,0 +1,112 @@
+---
+
+- name: Install with Yum
+  include: centos.yml
+  when: ansible_os_family == "RedHat" or ansible_os_family == "Centos"
+
+- name:  Config /etc/sudoers
+  lineinfile: dest=/etc/sudoers state=present line='{{ item }}' validate='visudo -cf %s'
+  with_items:
+    - "zabbix          ALL=NOPASSWD: /bin/netstat"
+    - "zabbix          ALL=NOPASSWD: /sbin/ethtool"
+    - "zabbix          ALL=NOPASSWD: /data/apps/opt/redis/bin/redis-cli"
+
+
+- name: crontab for iostat
+  cron: name="iostat" minute="*" job="iostat -m -x -t 1 -d 2 >/tmp/iostat_output 2>&1"
+
+
+- name: Ensure directory exists
+  file: path={{ item }} state=directory owner=root group=root
+  with_items:
+    - /etc/zabbix/script
+    - /etc/zabbix/zabbix_agentd.d/
+
+
+- name: Put on zabbix agent conffile
+  template: src={{item.src}} dest={{item.dest}} owner=zabbix group=zabbix mode={{item.mode}} force=yes
+  with_items:
+  - { src: 'script/tcp_connections.sh', dest: '/etc/zabbix/script/tcp_connections.sh', mode: 755 }
+  - { src: 'script/response_time.sh', dest: '/etc/zabbix/script/response_time.sh', mode: 755 }
+  - { src: 'script/redis_stats.sh', dest: '/etc/zabbix/script/redis_stats.sh', mode: 755 }
+  - { src: 'script/ngx_status.sh', dest: '/etc/zabbix/script/ngx_status.sh', mode: 755 }
+  - { src: 'zabbix_agentd.conf.j2', dest: '/etc/zabbix/zabbix_agentd.conf', mode: 644 }
+  tags:
+    - config
+  notify:
+    - restart zabbix-agent
+
+
+
+- name: kai ji qidong
+  service: name=zabbix-agent enabled=yes
+
+- name: put on zabbix agent by copy
+  copy: >
+    src={{ item.src }}
+    dest={{ item.dest }}
+    owner=zabbix
+    group=zabbix
+    mode={{item.mode}}
+    force=yes
+  with_items:
+  - { src: "redis_port.py",dest: "/etc/zabbix/script/redis_port.py",mode: 755 }
+  - { src: "lld-disks.py",dest: "/etc/zabbix/script/lld-disks.py",mode: 755 }
+  - { src: 'check_port.py', dest: '/etc/zabbix/script/check_port.py', mode: 755 }
+  tags:
+    - config
+
+- name: Create hostgroups
+  local_action:
+    module: zabbix_group
+    server_url: "{{ server_url }}"
+    login_user: "{{ zbx_api_user }}"
+    login_password: "{{ zbx_api_pass }}"
+    host_group: "{{ zbx_host_groups  }}"
+    state: "{{ zbx_create_hostgroup }}"
+  when: zbx_api_create_hostgroup
+  run_once: True
+  tags:
+    - group-api
+    - api
+
+
+- name: Create a new host or update an existing host's info
+  local_action:
+    module: zabbix_host
+    server_url: "{{ server_url }}"
+    login_user: "{{ zbx_api_user }}"
+    login_password: "{{ zbx_api_pass }}"
+    host_name: "{{ ansible_hostname }}"
+    visible_name: "{{ ansible_hostname }}"
+    host_groups: "{{ zbx_host_groups }}"
+    link_templates: "{{ zbx_link_templates }}"
+#    proxy: "{{ zbx_serveractive }}"
+    status: enabled
+    state: present
+    inventory_mode: automatic
+    interfaces: "{{ agent_interfaces }}"
+  tags:
+    - host-api
+    - api
+  notify:
+    - restart zabbix-agent
+
+
+
+- name: Create a new host macro or update an existing macro's value
+  local_action:
+    module: zabbix_hostmacro
+    server_url: "{{ server_url }}"
+    login_user: "{{ zbx_api_user }}"
+    login_password: "{{ zbx_api_pass }}"
+    host_name: "{{ ansible_hostname }}"
+    macro_name: "{{ item.macro_key }}"
+    macro_value: "{{ item.macro_value }}"
+  with_items: "{{ zbx_macros | default([])  }}"
+  tags:
+    - macro-api
+    - api
+  notify:
+    - restart zabbix-agent
+

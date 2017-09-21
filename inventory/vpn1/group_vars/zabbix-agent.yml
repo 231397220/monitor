@@ -1,0 +1,19 @@
+zbx_agent_HostMeta: vpn1
+zbx_api_user: Admin
+zbx_api_pass: zabbix
+zbx_create_host: present          # or absent
+zbx_server: 172.18.201.51
+zbx_serveractive: 172.18.201.51
+
+
+#=======ZABBIX-API===========
+zbx_host_groups:    #需要创建的群组
+  - vpn1
+nginx_daemon: "monitor-server.com:88"
+zbx_macros:
+  - macro_key: apache_type
+    macro_value: reverse_proxy
+zbx_link_templates:
+  - "Template DCITS OS Linux"
+  - "Template App Zabbix Agent"
+

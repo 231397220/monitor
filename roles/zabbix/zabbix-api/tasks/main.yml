@@ -1,0 +1,24 @@
+---
+- name: Install PIP
+  yum: name=python2-pip state=present
+
+- name: Upgrade pip and Install zabbix-api
+  pip: name={{ item }}  state=latest
+  with_items:
+    - pip
+    - zabbix-api
+
+
+- name: Create hostgroups
+  local_action:
+    module: zabbix_group
+    server_url: "{{ server_url }}"
+    login_user: "{{ zbx_api_user }}"
+    login_password: "{{ zbx_api_pass }}"
+    host_group: "{{ zbx_host_groups | default([]) }}"
+    state: "{{ zbx_create_hostgroup }}"
+  when: zbx_api_create_hostgroup
+  run_once: True
+  tags:
+    - group-api
+

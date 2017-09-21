@@ -1,0 +1,18 @@
+---
+- hosts: zabbix-server
+  user: root
+  become: yes
+  gather_facts: yes
+  roles:
+    - zabbix/zabbix-api
+  
+
+- hosts: zabbix-agent
+  tags:
+    - host-api
+    - macro-api
+  user: root
+  become: yes
+  gather_facts: yes
+  roles:
+    - zabbix/zabbix-agent

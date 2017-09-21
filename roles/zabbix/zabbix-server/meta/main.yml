@@ -1,0 +1,4 @@
+dependencies:
+#  - services/nginx
+  - services/mysql
+  - services/php 

@@ -1,0 +1,12 @@
+packages:
+  - sudo
+  - net-tools
+  - wget
+  - libsemanage-python
+  - libselinux-python
+  - nc
+  - vim
+  - crontabs
+  - pcp-import-iostat2pcp
+  - telnet
+#  - python2-pip
